@@ -19,6 +19,12 @@
     --muted:     #4a6080;
     --white:     #e8f0ff;
     --accent:    #7bb8f0;
+    --green:     #3a8a5a;
+    --green-soft:#5aaa7a;
+    --purple:    #7a6aaa;
+    --purple-soft:#9a8aca;
+    --orange:    #c87a30;
+    --orange-soft:#e8a050;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -73,7 +79,12 @@
 
   .search-label {
     font-size: 13px; color: var(--muted); font-weight: 500;
-    letter-spacing: 0.05em; margin-bottom: 12px; display: block;
+    letter-spacing: 0.05em; margin-bottom: 6px; display: block;
+  }
+
+  .search-hint {
+    font-size: 11.5px; color: var(--muted); margin-bottom: 14px;
+    opacity: 0.7;
   }
 
   .input-row { display: flex; gap: 10px; }
@@ -125,15 +136,17 @@
     display: none; background: rgba(192,80,80,0.1);
     border: 1px solid rgba(192,80,80,0.3); border-radius: 12px;
     padding: 14px 18px; color: #e08888; font-size: 13.5px;
-    margin-bottom: 16px; line-height: 1.7;
+    margin-bottom: 16px;
   }
   .error-box.visible { display: block; }
 
+  /* ── Result card ── */
   .result-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 18px; padding: 30px 26px; display: none;
     animation: fadeUp 0.4s ease; box-shadow: 0 4px 32px rgba(0,0,0,0.3);
   }
+
   .result-card.visible { display: block; }
 
   @keyframes fadeUp {
@@ -144,6 +157,7 @@
   .r-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
   .r-title { font-family: 'Lora', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 22px; line-height: 1.3; }
 
+  /* Scripture block */
   .scripture {
     border-left: 2px solid var(--blue-dim); padding: 16px 20px;
     background: rgba(30,60,110,0.25); border-radius: 0 12px 12px 0; margin-bottom: 22px;
@@ -152,15 +166,61 @@
   .scripture-text { font-family: 'Lora', serif; font-style: italic; font-size: 1.05rem; color: #b0c8e8; line-height: 1.78; }
   .scripture-ref { display: block; margin-top: 10px; font-size: 11.5px; color: var(--blue-soft); letter-spacing: 0.1em; font-weight: 700; }
 
+  /* Section labels */
   .section-label {
     display: flex; align-items: center; gap: 10px;
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 12px;
+    font-weight: 700; margin-bottom: 12px;
   }
+
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label.blue  { color: var(--accent); }
+  .section-label.green { color: var(--green-soft); }
+  .section-label.purple{ color: var(--purple-soft); }
+  .section-label.orange{ color: var(--orange-soft); }
 
-  .application-text { font-size: 14.5px; line-height: 1.82; color: #8aaed0; margin-bottom: 22px; }
+  .section-text {
+    font-size: 14.5px; line-height: 1.82; margin-bottom: 22px;
+  }
 
+  .section-text.blue   { color: #8aaed0; }
+  .section-text.green  { color: #80c8a0; }
+  .section-text.purple { color: #b0a0e0; }
+  .section-text.orange { color: #d0a070; }
+
+  /* EIA boxes */
+  .eia-box {
+    border-radius: 12px; padding: 18px 20px; margin-bottom: 14px;
+    border: 1px solid;
+  }
+
+  .eia-box.explicar {
+    background: rgba(58,138,90,0.1); border-color: rgba(58,138,90,0.3);
+  }
+
+  .eia-box.ilustrar {
+    background: rgba(122,106,170,0.1); border-color: rgba(122,106,170,0.3);
+  }
+
+  .eia-box.aplicar {
+    background: rgba(200,122,48,0.1); border-color: rgba(200,122,48,0.3);
+  }
+
+  .eia-title {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+
+  .eia-title.explicar { color: var(--green-soft); }
+  .eia-title.ilustrar { color: var(--purple-soft); }
+  .eia-title.aplicar  { color: var(--orange-soft); }
+
+  .eia-text { font-size: 14px; line-height: 1.78; }
+  .eia-text.explicar { color: #80c8a0; }
+  .eia-text.ilustrar { color: #b0a0e0; }
+  .eia-text.aplicar  { color: #d0a070; }
+
+  /* Keypoints */
   .keypoints { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
 
   .keypoint {
@@ -168,6 +228,7 @@
     background: var(--surface2); border: 1px solid var(--border);
     border-radius: 12px; padding: 13px 16px; transition: border-color 0.2s;
   }
+
   .keypoint:hover { border-color: var(--blue-dim); }
 
   .kp-n {
@@ -185,11 +246,11 @@
     border: 1px solid var(--border); border-radius: 10px;
     padding: 10px 18px; background: var(--surface2); transition: all 0.2s; font-weight: 600;
   }
+
   .jw-link:hover { border-color: var(--blue-dim); }
 
   footer { margin-top: 48px; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.9; }
   footer a { color: var(--blue-dim); text-decoration: none; }
-  footer a:hover { color: var(--blue-soft); }
 </style>
 </head>
 <body>
@@ -204,8 +265,9 @@
 <div class="container">
   <div class="search-box">
     <span class="search-label">O que você gostaria de pesquisar?</span>
+    <p class="search-hint">Digite um tema (ex: ansiedade, fé) ou um texto bíblico (ex: João 3:16)</p>
     <div class="input-row">
-      <input type="text" id="topicInput" placeholder="Ex: ansiedade, esperança, família, fé…" />
+      <input type="text" id="topicInput" placeholder="Tema ou texto bíblico…" />
       <button class="btn-buscar" id="searchBtn" onclick="pesquisar()">Buscar</button>
     </div>
   </div>
@@ -217,26 +279,10 @@
 
   <div class="error-box" id="errorBox"></div>
 
-  <div class="result-card" id="resultCard">
-    <p class="r-eyebrow" id="rEyebrow"></p>
-    <h2 class="r-title" id="rTitle"></h2>
-    <div class="scripture">
-      <p class="scripture-text" id="scriptureText"></p>
-      <span class="scripture-ref" id="scriptureRef"></span>
-    </div>
-    <p class="section-label">Aplicação para hoje</p>
-    <p class="application-text" id="applicationText"></p>
-    <p class="section-label">Pontos práticos</p>
-    <div class="keypoints" id="keypoints"></div>
-    <a class="jw-link" id="jwLink" href="https://www.jw.org/pt" target="_blank">
-      🔗 Explorar no JW.org/pt
-    </a>
-  </div>
+  <div class="result-card" id="resultCard"></div>
 </div>
 
-<footer>
-  Baseado em <a href="https://www.jw.org/pt" target="_blank">JW.org/pt</a>
-</footer>
+<footer>Baseado em <a href="https://www.jw.org/pt" target="_blank">JW.org/pt</a></footer>
 
 <script>
   const $ = id => document.getElementById(id);
@@ -264,23 +310,64 @@
       const obj = await res.json();
       if (obj.error) throw new Error(obj.error);
 
-      $('rEyebrow').textContent = `📖 Tema: ${topic}`;
-      $('rTitle').textContent = obj.title;
-      $('scriptureText').textContent = obj.scripture_text;
-      $('scriptureRef').textContent = obj.scripture_ref;
-      $('applicationText').textContent = obj.application;
+      const card = $('resultCard');
 
-      const kp = $('keypoints');
-      kp.innerHTML = '';
-      (obj.keypoints || []).forEach((t, i) => {
-        kp.innerHTML += `<div class="keypoint"><span class="kp-n">${i+1}</span><span class="kp-text">${t}</span></div>`;
-      });
+      if (obj.tipo === 'texto') {
+        // Modo: Explicar, Ilustrar, Aplicar
+        card.innerHTML = `
+          <p class="r-eyebrow">📖 Texto Bíblico</p>
+          <div class="scripture">
+            <p class="scripture-text">${obj.scripture_text}</p>
+            <span class="scripture-ref">${obj.scripture_ref}</span>
+          </div>
 
-      $('jwLink').href = `https://www.jw.org/pt/biblioteca/?wtlocale=T&q=${encodeURIComponent(obj.jw_search || topic)}`;
+          <div class="eia-box explicar">
+            <p class="eia-title explicar">📘 Explicar</p>
+            <p class="eia-text explicar">${obj.explicar}</p>
+          </div>
+
+          <div class="eia-box ilustrar">
+            <p class="eia-title ilustrar">🖼️ Ilustrar</p>
+            <p class="eia-text ilustrar">${obj.ilustrar}</p>
+          </div>
+
+          <div class="eia-box aplicar">
+            <p class="eia-title aplicar">✋ Aplicar</p>
+            <p class="eia-text aplicar">${obj.aplicar}</p>
+          </div>
+
+          <br>
+          <a class="jw-link" href="https://www.jw.org/pt/biblioteca/?wtlocale=T&q=${encodeURIComponent(obj.jw_search || topic)}" target="_blank">
+            🔗 Explorar no JW.org/pt
+          </a>
+        `;
+      } else {
+        // Modo: Tema
+        const kpHtml = (obj.keypoints || []).map((t, i) =>
+          `<div class="keypoint"><span class="kp-n">${i+1}</span><span class="kp-text">${t}</span></div>`
+        ).join('');
+
+        card.innerHTML = `
+          <p class="r-eyebrow">📖 Tema: ${topic}</p>
+          <h2 class="r-title">${obj.title}</h2>
+          <div class="scripture">
+            <p class="scripture-text">${obj.scripture_text}</p>
+            <span class="scripture-ref">${obj.scripture_ref}</span>
+          </div>
+          <p class="section-label blue">Aplicação para hoje</p>
+          <p class="section-text blue">${obj.application}</p>
+          <p class="section-label blue">Pontos práticos</p>
+          <div class="keypoints">${kpHtml}</div>
+          <a class="jw-link" href="https://www.jw.org/pt/biblioteca/?wtlocale=T&q=${encodeURIComponent(obj.jw_search || topic)}" target="_blank">
+            🔗 Explorar no JW.org/pt
+          </a>
+        `;
+      }
+
       show('resultCard', true);
 
     } catch(e) {
-      $('errorBox').innerHTML = `⚠️ Erro ao buscar. Tente novamente.`;
+      $('errorBox').textContent = `⚠️ Erro ao buscar. Tente novamente.`;
       show('errorBox', true);
     } finally {
       show('loading', false);
