@@ -1,7 +1,5 @@
 const express = require('express');
-const fetch = require('node-fetch');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -13,7 +11,7 @@ const API_KEY = process.env.ANTHROPIC_API_KEY;
 app.post('/buscar', async (req, res) => {
   const { topic } = req.body;
   if (!topic) return res.status(400).json({ error: 'Tema não informado' });
-  if (!API_KEY) return res.status(500).json({ error: 'Chave de API não configurada no servidor' });
+  if (!API_KEY) return res.status(500).json({ error: 'Chave de API não configurada' });
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -32,12 +30,17 @@ app.post('/buscar', async (req, res) => {
     });
 
     const data = await response.json();
+    console.log('Resposta API:', JSON.stringify(data).slice(0, 200));
+
+    if (data.error) return res.status(500).json({ error: data.error.message });
+
     const raw = (data.content || []).map(b => b.text || '').join('').trim();
     const obj = JSON.parse(raw.replace(/```json|```/g, '').trim());
     res.json(obj);
 
   } catch(e) {
-    res.status(500).json({ error: 'Erro ao buscar' });
+    console.error('Erro:', e.message);
+    res.status(500).json({ error: e.message });
   }
 });
 
